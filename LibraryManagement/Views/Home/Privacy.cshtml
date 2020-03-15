@@ -1,9 +1,9 @@
-﻿@model LibraryData.Models.FileUpload
+﻿@model LibraryData.Models.Book
 @{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1 class="text-center">Upload Files</h1>
-<div class="text-center">
+@*<div class="text-center">
     <section>
         <form method="post" enctype="multipart/form-data"
               asp-controller="FileUpload" asp-action="UploadFile">
@@ -13,6 +13,37 @@
                     <button type="submit" class="btn btn-outline-dark">Submit File</button>
                 </div>
             </div>
+        </form>
+    </section>
+</div>*@
+
+<div class="text-center">
+    <section>
+        <form method="post" enctype="multipart/form-data"
+              asp-controller="FileUpload" asp-action="UploadFile">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" type="text" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" type="text" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <label asp-for="ImageUploads"></label>
+                    <input asp-for="ImageUploads" type="file" multiple />
+                    <span asp-validation-for="ImageUploads" class="text-danger"></span>
+                    @*<button type="submit" class="btn btn-outline-dark">Submit File</button>*@
+                </div>
+            </div>
+            <input type="submit" value="Upload" class="btn btn-default" />
         </form>
     </section>
 </div>

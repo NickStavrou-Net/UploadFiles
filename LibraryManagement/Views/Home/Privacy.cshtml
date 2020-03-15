@@ -38,12 +38,12 @@
             <div class="form-group">
                 <div class="col-md-10">
                     <label asp-for="ImageUploads"></label>
-                    <input asp-for="ImageUploads" type="file" multiple />
+                    <input asp-for="ImageUploads" type="file" multiple accept="image/jpeg, image/png" />
                     <span asp-validation-for="ImageUploads" class="text-danger"></span>
                     @*<button type="submit" class="btn btn-outline-dark">Submit File</button>*@
                 </div>
             </div>
-            <input type="submit" value="Upload" class="btn btn-default" />
+            <button type="submit" class="btn btn-outline-dark">Submit File</button>
         </form>
     </section>
 </div>

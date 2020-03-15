@@ -57,11 +57,15 @@ namespace LibraryManagement.Controllers
 					await formfile.CopyToAsync(stream);
 				}
 
-				if(book.Id == 0)
+				var newbook = new Book()
 				{
-					_context.Add(book);
-					await _context.SaveChangesAsync();
-				}
+					Title = book.Title,
+					Description = book.Description,
+					ImageUploads = book.ImageUploads
+				};
+
+				_context.Books.Add(newbook);
+				await _context.SaveChangesAsync();
 		
 			}
 

@@ -29,7 +29,7 @@ namespace LibraryManagement.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> UploadFile(Book book, List<IFormFile> images)
+		public async Task<IActionResult> UploadFile([FromForm]Book book, List<IFormFile> images)
 		{
 			if (images is null || images.Count == 0)
 				return Content("file not selected");

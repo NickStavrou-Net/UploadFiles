@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LibraryManagement.Controllers
@@ -24,23 +25,30 @@ namespace LibraryManagement.Controllers
 			LibraryContext context)
 		{
 			_logger = logger;
-			_env = env;
+			_env = env ?? throw new ArgumentNullException(nameof(env));
 			_context = context;
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> UploadFile([FromForm]Book book, List<IFormFile> images)
+		[HttpGet]
+		public IActionResult UploadFile()
 		{
-			if (images is null || images.Count == 0)
+			return View();
+		}
+
+
+		[HttpPost("Upload")]
+		public async Task<IActionResult> UploadFile(Book book, IFormFileCollection images)
+		{
+			if (images is null || images.Count() == 0)
 				return Content("file not selected");
 
 			//Add Guid
 			var addGuid = Convert.ToString(Guid.NewGuid());
 
 			var filepaths = new List<string>(); 
-			foreach (var formfile in images)
+			foreach (var formfiles in images)
 			{
-				if (formfile.Length > 0)
+				if (formfiles.Length > 0)
 				{
 					//save it with Guid + random name
 					string path = $"{_env.WebRootPath}/images/{string.Concat(addGuid, Path.GetRandomFileName())}.png";
@@ -56,7 +64,8 @@ namespace LibraryManagement.Controllers
 
 					using (var stream = new FileStream(path, FileMode.Create))
 					{
-						await formfile.CopyToAsync(stream);
+						stream.Position = 0;
+						await formfiles.CopyToAsync(stream);
 						stream.Flush();
 					}
 					

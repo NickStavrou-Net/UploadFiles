@@ -17,7 +17,7 @@ namespace LibraryData.Models
         public string Description { get; set; }
 
         [Required]
-        public IList<string> ImageUploads { get; set; }
+        public List<string> ImageUploads { get; set; }
 
     }
 }

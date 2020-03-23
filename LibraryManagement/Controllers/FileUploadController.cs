@@ -66,7 +66,7 @@ namespace LibraryManagement.Controllers
 				{
 					Title = book.Title,
 					Description = book.Description,
-					ImageUploads = filepaths
+					ImageFilePaths = filepaths
 				};
 
 				_context.Books.Add(newbook);

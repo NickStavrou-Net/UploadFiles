@@ -10,14 +10,14 @@ namespace LibraryData.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        //[Required]
         public string Title { get; set; }
         
-        [Required]
+        //[Required]
         public string Description { get; set; }
 
         [Required]
-        public List<string> ImageUploads { get; set; }
+        public List<string> ImageFilePaths { get; set; }
 
     }
 }

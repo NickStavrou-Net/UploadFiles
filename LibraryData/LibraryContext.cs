@@ -12,11 +12,5 @@ namespace LibraryData
 
         public DbSet<Book> Books { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<FileUpload>(f => f.HasNoKey());
-
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

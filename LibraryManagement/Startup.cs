@@ -30,30 +30,9 @@ namespace LibraryManagement
         public void ConfigureServices(IServiceCollection services)
         {
             // TODO
-            #region snippet_AddMvc
-            services.AddMvc()
-                .AddRazorPagesOptions(options =>
-                {
-                    options.Conventions
-                        .AddPageApplicationModelConvention("/StreamedSingleFileUploadDb",
-                            model =>
-                            {
-                                model.Filters.Add(
-                                    new GenerateAntiforgeryTokenCookieAttribute());
-                                model.Filters.Add(
-                                    new DisableFormValueModelBindingAttribute());
-                            });
-                    options.Conventions
-                        .AddPageApplicationModelConvention("/StreamedSingleFileUploadPhysical",
-                            model =>
-                            {
-                                model.Filters.Add(
-                                    new GenerateAntiforgeryTokenCookieAttribute());
-                                model.Filters.Add(
-                                    new DisableFormValueModelBindingAttribute());
-                            });
-                });
-            #endregion
+
+            services.AddMvc();
+
             services.AddControllersWithViews();
 
             # region CookiePolicy

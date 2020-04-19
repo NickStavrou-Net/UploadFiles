@@ -3,10 +3,12 @@ using LibraryData.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -70,7 +72,10 @@ namespace LibraryManagement.Controllers
 					}
 					
 				}
-
+		
+			}
+			try
+			{
 				var newbook = new Book()
 				{
 					Title = book.Title,
@@ -80,8 +85,12 @@ namespace LibraryManagement.Controllers
 
 				_context.Books.Add(newbook);
 				await _context.SaveChangesAsync();
-		
 			}
+			catch(DbUpdateException ex)
+			{
+				Debug.WriteLine(ex.InnerException);
+			}
+
 
 			return RedirectToAction(nameof(Index), "Home");
 		}

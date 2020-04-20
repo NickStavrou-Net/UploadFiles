@@ -74,22 +74,16 @@ namespace LibraryManagement.Controllers
 				}
 		
 			}
-			try
-			{
-				var newbook = new Book()
-				{
-					Title = book.Title,
-					Description = book.Description,
-					ImageFilePaths = filepaths
-				};
 
-				_context.Books.Add(newbook);
-				await _context.SaveChangesAsync();
-			}
-			catch(DbUpdateException ex)
+			var newbook = new Book()
 			{
-				Debug.WriteLine(ex.InnerException);
-			}
+				Title = book.Title,
+				Description = book.Description,
+				ImageFilePaths = filepaths
+			};
+
+			_context.Books.Add(newbook);
+			await _context.SaveChangesAsync();
 
 
 			return RedirectToAction(nameof(Index), "Home");
